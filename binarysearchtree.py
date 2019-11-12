@@ -86,6 +86,53 @@ class BinarySearchTree(object):
         if node.rightChild:
             self.traverseInOrder(node.rightChild)
 
+    def remove(self, data):
+        
+        if self.root:
+            self.root = self.removeNode(data, self.root)
+    
+    def removeNode(self, data, node):
+
+        if not node:
+            return node
+        
+        if data < node.data:
+            node.leftChild = self.removeNode(data, node.leftChild)
+        elif data > node.data:
+            node.rightChild = self.removeNode(data, node.rightChild)
+        else:
+            if not node.leftChild and not node.rightChild:
+                print("Removing a leaf node")
+                del node
+                return None
+            
+            if not node.leftChild:
+                print("Removing node with single righ child...")
+                tempNode = node.rightChild
+                del node
+                return tempNode
+            
+            elif not node.rightChild:
+                print("Removing node with single left child...")
+                tempNode = node.leftChild
+                del node
+                return tempNode
+        
+        print("Removing node with two children")
+        tempNode = self.getPredecessor(node.leftChild)
+        node.data = tempNode.data
+        node.leftChild = self.removeNode(tempNode.data, node.leftChild)
+
+        
+    def getPredecessor(self, node):
+
+        if node.rightChild:
+            return self.getPredecessor(node.rightChild)
+        return node
+
+        
+
+
 bst = BinarySearchTree()
 bst.insert(5)
 bst.insert(10)
