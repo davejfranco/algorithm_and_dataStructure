@@ -1,6 +1,6 @@
 # Stack is an abstrack data type.
 # Main operations includes:
-#  - pus()
+#  - push()
 #  - pop()
 #  - peek()
 # It has LIFO structure meaning Last in, First Out
